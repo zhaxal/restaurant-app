@@ -3,6 +3,7 @@ package com.blum.restaurantapp.models;
 
 
 import javax.persistence.*;
+import java.util.Collection;
 
 
 @Entity
@@ -19,10 +20,34 @@ public class Users {
     private String firstname;
     private String lastname;
     private String email;
+    private String password;
     private int phoneNumber;
+    private boolean enabled;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getFirstname() {
@@ -35,6 +60,10 @@ public class Users {
 
     public String getEmail() {
         return email;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public int getPhoneNumber() {
@@ -53,6 +82,10 @@ public class Users {
         this.phoneNumber = phoneNumber;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
@@ -68,4 +101,10 @@ public class Users {
     public void setReservations(Reservations reservations) {
         this.reservations = reservations;
     }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+
 }

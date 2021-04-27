@@ -5,4 +5,9 @@ import com.blum.restaurantapp.models.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MealsRepository extends JpaRepository<Meals,Long> {
+    @Override
+    Meals getOne(Long aLong);
+
+    @Override
+    void delete(Meals meals);
 }
