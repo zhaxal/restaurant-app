@@ -20,4 +20,11 @@ public class UsersService {
         return CompletableFuture.completedFuture(user);
     }
 
+    @Async
+    public CompletableFuture<Users> getUser(String email){
+        Users user = usersRepo.findByEmail(email);
+
+        return CompletableFuture.completedFuture(user);
+    }
+
 }
