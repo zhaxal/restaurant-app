@@ -1,6 +1,8 @@
 package com.blum.restaurantapp.controllers;
 
+import com.blum.restaurantapp.models.Reservations;
 import com.blum.restaurantapp.models.Users;
+import com.blum.restaurantapp.service.ReservationService;
 import com.blum.restaurantapp.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -22,6 +24,9 @@ public class AppController {
     private UsersService usersService;
 
     @Autowired
+    private ReservationService reservationService;
+
+    @Autowired
     private IAuthenticationFacade authenticationFacade;
 
     @GetMapping("/testdb")
@@ -31,11 +36,13 @@ public class AppController {
     }
 
     @GetMapping("/profile")
-    public String showMyUser(Model model) {
+    public String showMyUserAndReservations(Model model) {
         try {
             String email = getCurrentUsername().get();
             Users user = usersService.getUser(email).get();
             model.addAttribute("user",user);
+            ArrayList<Reservations> reservations = reservationService.getReservations(email).get();
+            model.addAttribute("reservations", reservations);
 
 
         } catch (InterruptedException | ExecutionException e) {
