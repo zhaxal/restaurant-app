@@ -1,7 +1,9 @@
 package com.blum.restaurantapp.controllers;
 
+import com.blum.restaurantapp.models.ReservationMeals;
 import com.blum.restaurantapp.models.Reservations;
 import com.blum.restaurantapp.models.Users;
+import com.blum.restaurantapp.service.ReservationMealsService;
 import com.blum.restaurantapp.service.ReservationService;
 import com.blum.restaurantapp.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class AppController {
     private ReservationService reservationService;
 
     @Autowired
+    private ReservationMealsService reservationMealsService;
+
+    @Autowired
     private IAuthenticationFacade authenticationFacade;
 
     @GetMapping("/testdb")
@@ -42,7 +47,15 @@ public class AppController {
             Users user = usersService.getUser(email).get();
             model.addAttribute("user",user);
             ArrayList<Reservations> reservations = reservationService.getReservations(email).get();
+            ArrayList<ReservationMeals> reservationMeals = new ArrayList<>();
+            for (Reservations reservation : reservations) {
+                ArrayList<ReservationMeals> oneReservationMeals = reservationMealsService.getReservationMeals(reservation.getId()).get();
+                for (ReservationMeals reservationMeals1: oneReservationMeals) {
+                    reservationMeals.add(reservationMeals1);
+                }
+            }
             model.addAttribute("reservations", reservations);
+            model.addAttribute("reservationMeals", reservationMeals);
 
 
         } catch (InterruptedException | ExecutionException e) {
