@@ -1,6 +1,7 @@
 package com.blum.restaurantapp.service;
 
 import com.blum.restaurantapp.models.Reservations;
+import com.blum.restaurantapp.models.Tables;
 import com.blum.restaurantapp.repository.ReservationsRepository;
 import com.blum.restaurantapp.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,14 @@ public class ReservationService {
             list.add(reservation);
         }
         return CompletableFuture.completedFuture(list);
+    }
+
+    @Async
+    public CompletableFuture<Reservations> getReservationsByTableId(Long id){
+        Reservations reservations = reservationsRepo.getByTablesId(id);
+        reservations.setUsers(null);
+        reservations.setTables(null);
+        reservations.setReservationMeals(null);
+        return CompletableFuture.completedFuture(reservations);
     }
 }

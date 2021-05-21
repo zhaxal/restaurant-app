@@ -16,6 +16,8 @@ public class Restaurants {
     private double rating;
     private Timestamp openTime;
     private Timestamp closeTime;
+    private double x;
+    private double y;
 
     @OneToOne(mappedBy = "restaurants")
     private Schedule schedule;
@@ -28,6 +30,22 @@ public class Restaurants {
 
     public Tables getTables() {
         return tables;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 
     public void setTables(Tables tables) {

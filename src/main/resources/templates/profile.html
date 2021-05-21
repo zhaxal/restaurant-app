@@ -2,66 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+    <title>Profile</title>
+    <link rel="stylesheet" href="../static/css/style.css">
 
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            border: 1px solid #e7e7e7;
-            background-color: #f3f3f3;
-        }
-
-        li {
-            float: left;
-        }
-
-        li a {
-            display: block;
-            color: #666;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        li a:hover:not(.active) {
-            background-color: #ddd;
-        }
-
-        li a.active {
-            color: white;
-            background-color: #4CAF50;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even){background-color: #f2f2f2}
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-    </style>
 </head>
 <body>
 
 <ul>
-    <li><a href="/home">Home</a></li>
     <li><a href="/profile">Profile</a></li>
-    <li><a href="/admin">Admin</a></li>
+    <li><a href="/map">Map</a></li>
+    <li sec:authorize="hasAuthority('READ_PRIVILEGE')"><a href="/admin">Admin</a></li>
+    <li><a href="/logout">Logout</a></li>
 </ul>
 
 </br>

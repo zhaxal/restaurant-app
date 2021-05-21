@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking</title>
+    <script>
+        var restaurantId = "[[${restaurantId}]]";
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/js/booking.js"></script>
+</head>
+<body>
+
+<div class="center" style="width: 25%">
+    <label>From:</label>
+    <input id="from" type="datetime-local"></br></br>
+    <label>To:</label>
+    <input id="to" type="datetime-local"></br></br>
+    <label>People:</label>
+    <input id="people" type="number"></br></br>
+    <input onclick="checkAvailability()" type="submit" value="Check Availability"></br></br>
+    <div id="tables"></div>
+</div>
+
+
+
+</body>
+</html>

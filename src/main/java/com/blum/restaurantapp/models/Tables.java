@@ -13,12 +13,23 @@ public class Tables {
 
     private int seats;
 
+    public Tables(Long id, int seats, Reservations reservations, Restaurants restaurants){
+        this.id = id;
+        this.seats = seats;
+        this.reservations = reservations;
+        this.restaurants = restaurants;
+    }
+
     @OneToOne(mappedBy = "tables")
     private Reservations reservations;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
     private Restaurants restaurants;
+
+    public Tables() {
+
+    }
 
     public Long getId() {
         return id;
@@ -34,6 +45,16 @@ public class Tables {
 
     public void setReservations(Reservations reservations) {
         this.reservations = reservations;
+    }
+
+    @Override
+    public String toString() {
+        return "Tables{" +
+                "id=" + id +
+                ", seats=" + seats +
+                ", reservations=" + reservations +
+                ", restaurants=" + restaurants +
+                '}';
     }
 
 

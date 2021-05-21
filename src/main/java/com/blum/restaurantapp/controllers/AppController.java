@@ -1,11 +1,7 @@
 package com.blum.restaurantapp.controllers;
 
-import com.blum.restaurantapp.models.ReservationMeals;
-import com.blum.restaurantapp.models.Reservations;
-import com.blum.restaurantapp.models.Users;
-import com.blum.restaurantapp.service.ReservationMealsService;
-import com.blum.restaurantapp.service.ReservationService;
-import com.blum.restaurantapp.service.UsersService;
+import com.blum.restaurantapp.models.*;
+import com.blum.restaurantapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
@@ -13,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import com.blum.restaurantapp.component.IAuthenticationFacade;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -29,16 +26,16 @@ public class AppController {
     private ReservationService reservationService;
 
     @Autowired
+    private RestaurantsService restaurantsService;
+
+    @Autowired
+    private TablesService tablesService;
+
+    @Autowired
     private ReservationMealsService reservationMealsService;
 
     @Autowired
     private IAuthenticationFacade authenticationFacade;
-
-    @GetMapping("/testdb")
-    public String showMyQuestionsAndAnswers(Model model) throws ExecutionException, InterruptedException {
-
-        return usersService.getUser(0L).get().toString();
-    }
 
     @GetMapping("/profile")
     public String showMyUserAndReservations(Model model) {
@@ -62,6 +59,12 @@ public class AppController {
             e.printStackTrace();
         }
         return "profile";
+    }
+
+    @GetMapping("/booking")
+    public String showBookingPage(@RequestParam Long id, Model model){
+        model.addAttribute("restaurantId",id);
+        return "booking";
     }
 
     @Async

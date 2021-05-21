@@ -14,4 +14,6 @@ public interface ReservationsRepository extends JpaRepository<Reservations,Long>
 
     @Override
     void delete(Reservations reservations);
+
+    Reservations getByTablesId(Long table_id);
 }
