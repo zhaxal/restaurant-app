@@ -67,6 +67,11 @@ public class AppController {
         return "booking";
     }
 
+    @GetMapping("/menu")
+    public String showMenuPage(@RequestParam Long restaurant_id,Model model){
+        return "menu";
+    }
+
     @Async
     public CompletableFuture<String> getCurrentUsername(){
         Authentication authentication = authenticationFacade.getAuthentication();

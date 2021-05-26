@@ -15,7 +15,7 @@ function showTables(){
             tables.id = "list";
             mainDiv.appendChild(tables);
             data.forEach(table => {
-                var t = document.createElement("button");
+                var t = document.createElement("a");
                 t.appendChild(document.createTextNode(table.id))
                 tables.appendChild(t);
             })
@@ -55,8 +55,9 @@ function checkAvailability(){
                             if(table.seats >= people){
                                 if(!(from <= dbTo && from >= dbFrom ||
                                     dbFrom <= to && dbTo >= to)){
-                                var t = document.createElement("button");
-                                t.appendChild(document.createTextNode(table.id))
+                                var t = document.createElement("a");
+                                t.appendChild(document.createTextNode(table.id));
+                                t.href = "/map";
                                 tables.appendChild(t);
                                 }
                             }else{
