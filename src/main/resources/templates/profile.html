@@ -41,30 +41,26 @@
         <th>Restaurant</th>
         <th>From</th>
         <th>To</th>
+        <th>Ordered</th>
     </tr>
     <tr data-th-each="reservation : ${reservations}">
         <td data-th-text="${reservation.getId()}"></td>
         <td data-th-text="${reservation.getTables().getRestaurants().getName()}"></td>
         <td data-th-text="${reservation.getReservedFrom()}"></td>
         <td data-th-text="${reservation.getReservedTo()}"></td>
+        <td>
+            <div>
+                <div  data-th-each="reservationMeal : ${reservation.getReservationMeals()}">
+                    <p th:text="${reservationMeal.getMeals().getName()}"></p>
+                </div>
+            </div>
+        </td>
     </tr>
 </table>
 
 <br>
 <br>
-<h1>Reserved meals history</h1>
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Restaurant</th>
-        <th>Meal</th>
-    </tr>
-    <tr data-th-each="reservationMeal : ${reservationMeals}">
-        <td data-th-text="${reservationMeal.getReservations().getDate()}"></td>
-        <td data-th-text="${reservationMeal.getReservations().getTables().getRestaurants().getName()}"></td>
-        <td data-th-text="${reservationMeal.getMeals().getName()}"></td>
-    </tr>
-</table>
+
 
 </body>
 </html>

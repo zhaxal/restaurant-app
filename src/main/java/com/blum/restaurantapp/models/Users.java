@@ -4,6 +4,7 @@ package com.blum.restaurantapp.models;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 
 @Entity
@@ -14,8 +15,8 @@ public class Users {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(mappedBy = "users")
-    private Reservations reservations;
+    @OneToMany(mappedBy = "users")
+    private Set<Reservations> reservations;
 
     private String firstname;
     private String lastname;
@@ -70,7 +71,7 @@ public class Users {
         return phoneNumber;
     }
 
-    public Reservations getReservations() {
+    public Set<Reservations> getReservations() {
         return reservations;
     }
 
@@ -98,7 +99,7 @@ public class Users {
         this.email = email;
     }
 
-    public void setReservations(Reservations reservations) {
+    public void setReservations(Set<Reservations> reservations) {
         this.reservations = reservations;
     }
 

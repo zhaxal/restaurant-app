@@ -3,6 +3,7 @@ package com.blum.restaurantapp.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 
 @Entity
@@ -13,10 +14,10 @@ public class Reservations {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(mappedBy = "reservations")
-    private ReservationMeals reservationMeals;
+    @OneToMany(mappedBy = "reservations",fetch = FetchType.EAGER)
+    private Set<ReservationMeals> reservationMeals;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users users;
 
@@ -24,7 +25,7 @@ public class Reservations {
     private Timestamp reservedFrom;
     private Timestamp reservedTo;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "table_id", referencedColumnName = "id")
     private Tables tables;
 
@@ -54,11 +55,11 @@ public class Reservations {
         return users;
     }
 
-    public ReservationMeals getReservationMeals() {
+    public Set<ReservationMeals> getReservationMeals() {
         return reservationMeals;
     }
 
-    public void setReservationMeals(ReservationMeals reservationMeals) {
+    public void setReservationMeals(Set<ReservationMeals> reservationMeals) {
         this.reservationMeals = reservationMeals;
     }
 

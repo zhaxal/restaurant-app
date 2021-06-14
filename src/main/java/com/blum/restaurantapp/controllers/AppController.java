@@ -9,9 +9,14 @@ import org.springframework.stereotype.Controller;
 import com.blum.restaurantapp.component.IAuthenticationFacade;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.security.auth.callback.TextOutputCallback;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -30,6 +35,9 @@ public class AppController {
 
     @Autowired
     private TablesService tablesService;
+
+    @Autowired
+    private MealsService mealsService;
 
     @Autowired
     private ReservationMealsService reservationMealsService;
@@ -68,7 +76,18 @@ public class AppController {
     }
 
     @GetMapping("/menu")
-    public String showMenuPage(@RequestParam Long restaurant_id,Model model){
+    public String showMenuPage(@RequestParam Long restaurant_id, @RequestParam Long table_id, @RequestParam String f, @RequestParam String t, Model model) {
+        try {
+            ArrayList<Meals> meals = mealsService.getMealsByRestaurantId(restaurant_id).get();
+            model.addAttribute("restaurantId", restaurant_id);
+            model.addAttribute("table_id", table_id);
+            model.addAttribute("to", t);
+            model.addAttribute("from", f);
+            model.addAttribute("meals", meals);
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
         return "menu";
     }
 

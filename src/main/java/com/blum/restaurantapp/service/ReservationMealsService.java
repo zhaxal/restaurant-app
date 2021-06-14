@@ -28,4 +28,9 @@ public class ReservationMealsService {
         }
         return CompletableFuture.completedFuture(list);
     }
+
+    @Async
+    public void setReservationMeals(ReservationMeals reservationMeals){
+        reservationMealsRepo.save(reservationMeals);
+    }
 }

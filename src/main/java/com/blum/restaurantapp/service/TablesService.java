@@ -1,6 +1,5 @@
 package com.blum.restaurantapp.service;
 
-import com.blum.restaurantapp.models.Restaurants;
 import com.blum.restaurantapp.models.Tables;
 import com.blum.restaurantapp.repository.TablesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,13 @@ public class TablesService {
             list.add(tables);
         }
         return CompletableFuture.completedFuture(list);
+    }
+
+    @Async
+    public CompletableFuture<Tables> getTableById(Long id){
+        Tables tables = new Tables();
+        tables = tablesRepo.getById(id);
+        return CompletableFuture.completedFuture(tables);
     }
 
     @Async

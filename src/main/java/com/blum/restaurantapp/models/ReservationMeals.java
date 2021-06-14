@@ -12,11 +12,11 @@ public class ReservationMeals {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "reservation_id", referencedColumnName = "id")
     private Reservations reservations;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "meal_id", referencedColumnName = "id")
     private Meals meals;
 

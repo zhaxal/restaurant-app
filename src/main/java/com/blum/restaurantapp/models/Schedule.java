@@ -16,7 +16,7 @@ public class Schedule {
     private Timestamp date;
     private boolean status;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
     private Restaurants restaurants;
 

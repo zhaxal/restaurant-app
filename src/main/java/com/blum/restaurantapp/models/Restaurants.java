@@ -2,6 +2,7 @@ package com.blum.restaurantapp.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "restaurants")
@@ -19,16 +20,16 @@ public class Restaurants {
     private double x;
     private double y;
 
-    @OneToOne(mappedBy = "restaurants")
-    private Schedule schedule;
+    @OneToMany(mappedBy = "restaurants")
+    private Set<Schedule> schedule;
 
-    @OneToOne(mappedBy = "restaurants")
-    private Meals meals;
+    @OneToMany(mappedBy = "restaurants")
+    private Set<Meals> meals;
 
-    @OneToOne(mappedBy = "restaurants")
-    private Tables tables;
+    @OneToMany(mappedBy = "restaurants")
+    private Set<Tables> tables;
 
-    public Tables getTables() {
+    public Set<Tables> getTables() {
         return tables;
     }
 
@@ -48,7 +49,7 @@ public class Restaurants {
         this.y = y;
     }
 
-    public void setTables(Tables tables) {
+    public void setTables(Set<Tables> tables) {
         this.tables = tables;
     }
 
@@ -56,7 +57,7 @@ public class Restaurants {
         return id;
     }
 
-    public Schedule getSchedule() {
+    public Set<Schedule> getSchedule() {
         return schedule;
     }
 
@@ -64,7 +65,7 @@ public class Restaurants {
         this.id = id;
     }
 
-    public void setSchedule(Schedule schedule) {
+    public void setSchedule(Set<Schedule> schedule) {
         this.schedule = schedule;
     }
 
@@ -84,11 +85,11 @@ public class Restaurants {
         this.name = name;
     }
 
-    public Meals getMeals() {
+    public Set<Meals> getMeals() {
         return meals;
     }
 
-    public void setMeals(Meals meals) {
+    public void setMeals(Set<Meals> meals) {
         this.meals = meals;
     }
 

@@ -1,11 +1,7 @@
 package com.blum.restaurantapp.service;
 
-import com.blum.restaurantapp.models.Privilege;
-import com.blum.restaurantapp.models.Role;
-import com.blum.restaurantapp.models.Users;
-import com.blum.restaurantapp.repository.PrivilegeRepository;
-import com.blum.restaurantapp.repository.RoleRepository;
-import com.blum.restaurantapp.repository.UsersRepository;
+import com.blum.restaurantapp.models.*;
+import com.blum.restaurantapp.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -35,6 +31,12 @@ public class SetupDataLoader implements
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private RestaurantRepository restaurantRepository;
+
+    @Autowired
+    private MealsRepository mealsRepository;
+
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -50,6 +52,9 @@ public class SetupDataLoader implements
                 readPrivilege, writePrivilege);
         createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
         createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
+
+
+
 
 //        Role userRole = roleRepository.findByName("ROLE_ADMIN");
 //        Users user = new Users();

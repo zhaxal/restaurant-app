@@ -13,14 +13,17 @@
 <body>
 
 <div class="center" style="width: 25%">
-    <label>From:</label>
+    <label>Arrive time:</label>
     <input id="from" type="datetime-local"></br></br>
-    <label>To:</label>
-    <input id="to" type="datetime-local"></br></br>
+    <label>You going to spend:</label>
+    <input placeholder="hours" id="hour" type="number"></br>
+    <input placeholder="minutes" id="minute" type="number"></br></br>
     <label>People:</label>
     <input id="people" type="number"></br></br>
     <input onclick="checkAvailability()" type="submit" value="Check Availability"></br></br>
-    <div id="tables"></div>
+    <div style="height: 20vh; border: #666666 2px" id="tables">
+
+    </div>
 </div>
 
 

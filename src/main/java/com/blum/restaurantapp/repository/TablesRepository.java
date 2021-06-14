@@ -21,4 +21,6 @@ public interface TablesRepository extends JpaRepository<Tables,Long> {
     List<Tables> findAll();
 
     List<Tables> getByRestaurants_Id(Long id);
+
+    Tables getById(Long id);
 }

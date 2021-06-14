@@ -1,6 +1,7 @@
 package com.blum.restaurantapp.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -13,17 +14,17 @@ public class Tables {
 
     private int seats;
 
-    public Tables(Long id, int seats, Reservations reservations, Restaurants restaurants){
+    public Tables(Long id, int seats, Set<Reservations> reservations, Restaurants restaurants){
         this.id = id;
         this.seats = seats;
         this.reservations = reservations;
         this.restaurants = restaurants;
     }
 
-    @OneToOne(mappedBy = "tables")
-    private Reservations reservations;
+    @OneToMany(mappedBy = "tables")
+    private Set<Reservations> reservations;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
     private Restaurants restaurants;
 
@@ -39,11 +40,11 @@ public class Tables {
         return restaurants;
     }
 
-    public Reservations getReservations() {
+    public Set<Reservations> getReservations() {
         return reservations;
     }
 
-    public void setReservations(Reservations reservations) {
+    public void setReservations(Set<Reservations> reservations) {
         this.reservations = reservations;
     }
 
